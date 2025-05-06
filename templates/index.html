@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravador de Áudio Profissional</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-microphone"></i> Sistema de Gravação</h1>
+    </div>
+    
+    <div class="container">
+        {% for env in environments %}
+        <div class="card" id="card-{{ env }}">
+            <h3><i class="fas fa-map-marker-alt"></i> {{ env }}</h3>
+            
+            <div class="btn-group">
+                <button class="btn btn-start" onclick="startRecording('{{ env }}')">
+                    <i class="fas fa-circle-play"></i> Iniciar
+                </button>
+                <button class="btn btn-stop" onclick="stopRecording('{{ env }}')">
+                    <i class="fas fa-stop"></i> Parar
+                </button>
+            </div>
+            
+            <div class="status" id="status-{{ env }}">Pronto para gravar</div>
+            
+            <div class="timer" id="timer-{{ env }}">00:00</div>
+            
+            <div class="file-info" id="file-info-{{ env }}"></div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
